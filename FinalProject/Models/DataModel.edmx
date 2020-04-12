@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblDeliveryOrder">
+          <Key>
+            <PropertyRef Name="order_num" />
+          </Key>
+          <Property Name="order_num" Type="int" Nullable="false" />
+          <Property Name="special_instructions" Type="varchar" MaxLength="50" />
+          <Property Name="time_order_placed" Type="datetime" />
+          <Property Name="customer_address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblGuestFeedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="int" Nullable="false" />
+          <Property Name="guest_phone_number" Type="varchar" MaxLength="50" />
+          <Property Name="feedback_content" Type="varchar" MaxLength="50" />
+          <Property Name="date_submitted" Type="date" />
+          <Property Name="guest_email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblGuests">
+          <Key>
+            <PropertyRef Name="guest_phone_number" />
+          </Key>
+          <Property Name="guest_phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="guest_name" Type="varchar" MaxLength="50" />
+          <Property Name="time_arrived" Type="datetime" />
+          <Property Name="num_of_guests" Type="int" />
+          <Property Name="table_num" Type="int" Nullable="false" />
+          <Property Name="reservation" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblUnusedTable">
+          <Key>
+            <PropertyRef Name="table_num" />
+          </Key>
+          <Property Name="table_num" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblUsedTables">
+          <Key>
+            <PropertyRef Name="table_num" />
+          </Key>
+          <Property Name="table_num" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__tblGuestF__guest__36B12243">
+          <End Role="tblGuests" Type="Self.tblGuests" Multiplicity="0..1" />
+          <End Role="tblGuestFeedback" Type="Self.tblGuestFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGuests">
+              <PropertyRef Name="guest_phone_number" />
+            </Principal>
+            <Dependent Role="tblGuestFeedback">
+              <PropertyRef Name="guest_phone_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblGuests__table__47DBAE45">
+          <End Role="tblUsedTables" Type="Self.tblUsedTables" Multiplicity="1" />
+          <End Role="tblGuests" Type="Self.tblGuests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsedTables">
+              <PropertyRef Name="table_num" />
+            </Principal>
+            <Dependent Role="tblGuests">
+              <PropertyRef Name="table_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="tblDeliveryOrder" EntityType="Self.tblDeliveryOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGuestFeedback" EntityType="Self.tblGuestFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGuests" EntityType="Self.tblGuests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUnusedTable" EntityType="Self.tblUnusedTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsedTables" EntityType="Self.tblUsedTables" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblGuestF__guest__36B12243" Association="Self.FK__tblGuestF__guest__36B12243">
+            <End Role="tblGuests" EntitySet="tblGuests" />
+            <End Role="tblGuestFeedback" EntitySet="tblGuestFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblGuests__table__47DBAE45" Association="Self.FK__tblGuests__table__47DBAE45">
+            <End Role="tblUsedTables" EntitySet="tblUsedTables" />
+            <End Role="tblGuests" EntitySet="tblGuests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblDeliveryOrder">
+          <Key>
+            <PropertyRef Name="order_num" />
+          </Key>
+          <Property Name="order_num" Type="Int32" Nullable="false" />
+          <Property Name="special_instructions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time_order_placed" Type="DateTime" Precision="3" />
+          <Property Name="customer_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblGuestFeedback">
+          <Key>
+            <PropertyRef Name="feedback_id" />
+          </Key>
+          <Property Name="feedback_id" Type="Int32" Nullable="false" />
+          <Property Name="guest_phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="feedback_content" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_submitted" Type="DateTime" Precision="0" />
+          <Property Name="guest_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblGuest" Relationship="Self.FK__tblGuestF__guest__36B12243" FromRole="tblGuestFeedback" ToRole="tblGuests" />
+        </EntityType>
+        <EntityType Name="tblGuest">
+          <Key>
+            <PropertyRef Name="guest_phone_number" />
+          </Key>
+          <Property Name="guest_phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="guest_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time_arrived" Type="DateTime" Precision="3" />
+          <Property Name="num_of_guests" Type="Int32" />
+          <Property Name="table_num" Type="Int32" Nullable="false" />
+          <Property Name="reservation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblGuestFeedbacks" Relationship="Self.FK__tblGuestF__guest__36B12243" FromRole="tblGuests" ToRole="tblGuestFeedback" />
+          <NavigationProperty Name="tblUsedTable" Relationship="Self.FK__tblGuests__table__47DBAE45" FromRole="tblGuests" ToRole="tblUsedTables" />
+        </EntityType>
+        <EntityType Name="tblUnusedTable">
+          <Key>
+            <PropertyRef Name="table_num" />
+          </Key>
+          <Property Name="table_num" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblUsedTable">
+          <Key>
+            <PropertyRef Name="table_num" />
+          </Key>
+          <Property Name="table_num" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblGuests" Relationship="Self.FK__tblGuests__table__47DBAE45" FromRole="tblUsedTables" ToRole="tblGuests" />
+        </EntityType>
+        <Association Name="FK__tblGuestF__guest__36B12243">
+          <End Role="tblGuests" Type="Self.tblGuest" Multiplicity="0..1" />
+          <End Role="tblGuestFeedback" Type="Self.tblGuestFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGuests">
+              <PropertyRef Name="guest_phone_number" />
+            </Principal>
+            <Dependent Role="tblGuestFeedback">
+              <PropertyRef Name="guest_phone_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblGuests__table__47DBAE45">
+          <End Role="tblUsedTables" Type="Self.tblUsedTable" Multiplicity="1" />
+          <End Role="tblGuests" Type="Self.tblGuest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsedTables">
+              <PropertyRef Name="table_num" />
+            </Principal>
+            <Dependent Role="tblGuests">
+              <PropertyRef Name="table_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDeliveryOrders" EntityType="Self.tblDeliveryOrder" />
+          <EntitySet Name="tblGuestFeedbacks" EntityType="Self.tblGuestFeedback" />
+          <EntitySet Name="tblGuests" EntityType="Self.tblGuest" />
+          <EntitySet Name="tblUnusedTables" EntityType="Self.tblUnusedTable" />
+          <EntitySet Name="tblUsedTables" EntityType="Self.tblUsedTable" />
+          <AssociationSet Name="FK__tblGuestF__guest__36B12243" Association="Self.FK__tblGuestF__guest__36B12243">
+            <End Role="tblGuests" EntitySet="tblGuests" />
+            <End Role="tblGuestFeedback" EntitySet="tblGuestFeedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblGuests__table__47DBAE45" Association="Self.FK__tblGuests__table__47DBAE45">
+            <End Role="tblUsedTables" EntitySet="tblUsedTables" />
+            <End Role="tblGuests" EntitySet="tblGuests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="RestaurantDB">
+          <EntitySetMapping Name="tblDeliveryOrders">
+            <EntityTypeMapping TypeName="Models.tblDeliveryOrder">
+              <MappingFragment StoreEntitySet="tblDeliveryOrder">
+                <ScalarProperty Name="order_num" ColumnName="order_num" />
+                <ScalarProperty Name="special_instructions" ColumnName="special_instructions" />
+                <ScalarProperty Name="time_order_placed" ColumnName="time_order_placed" />
+                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGuestFeedbacks">
+            <EntityTypeMapping TypeName="Models.tblGuestFeedback">
+              <MappingFragment StoreEntitySet="tblGuestFeedback">
+                <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
+                <ScalarProperty Name="guest_phone_number" ColumnName="guest_phone_number" />
+                <ScalarProperty Name="feedback_content" ColumnName="feedback_content" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="guest_email" ColumnName="guest_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGuests">
+            <EntityTypeMapping TypeName="Models.tblGuest">
+              <MappingFragment StoreEntitySet="tblGuests">
+                <ScalarProperty Name="guest_phone_number" ColumnName="guest_phone_number" />
+                <ScalarProperty Name="guest_name" ColumnName="guest_name" />
+                <ScalarProperty Name="time_arrived" ColumnName="time_arrived" />
+                <ScalarProperty Name="num_of_guests" ColumnName="num_of_guests" />
+                <ScalarProperty Name="table_num" ColumnName="table_num" />
+                <ScalarProperty Name="reservation" ColumnName="reservation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUnusedTables">
+            <EntityTypeMapping TypeName="Models.tblUnusedTable">
+              <MappingFragment StoreEntitySet="tblUnusedTable">
+                <ScalarProperty Name="table_num" ColumnName="table_num" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsedTables">
+            <EntityTypeMapping TypeName="Models.tblUsedTable">
+              <MappingFragment StoreEntitySet="tblUsedTables">
+                <ScalarProperty Name="table_num" ColumnName="table_num" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

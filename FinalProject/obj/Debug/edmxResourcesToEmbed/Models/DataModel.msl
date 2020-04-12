@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="RestaurantDB">
+    <EntitySetMapping Name="tblDeliveryOrders">
+      <EntityTypeMapping TypeName="Models.tblDeliveryOrder">
+        <MappingFragment StoreEntitySet="tblDeliveryOrder">
+          <ScalarProperty Name="order_num" ColumnName="order_num" />
+          <ScalarProperty Name="special_instructions" ColumnName="special_instructions" />
+          <ScalarProperty Name="time_order_placed" ColumnName="time_order_placed" />
+          <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGuestFeedbacks">
+      <EntityTypeMapping TypeName="Models.tblGuestFeedback">
+        <MappingFragment StoreEntitySet="tblGuestFeedback">
+          <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
+          <ScalarProperty Name="guest_phone_number" ColumnName="guest_phone_number" />
+          <ScalarProperty Name="feedback_content" ColumnName="feedback_content" />
+          <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+          <ScalarProperty Name="guest_email" ColumnName="guest_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGuests">
+      <EntityTypeMapping TypeName="Models.tblGuest">
+        <MappingFragment StoreEntitySet="tblGuests">
+          <ScalarProperty Name="guest_phone_number" ColumnName="guest_phone_number" />
+          <ScalarProperty Name="guest_name" ColumnName="guest_name" />
+          <ScalarProperty Name="time_arrived" ColumnName="time_arrived" />
+          <ScalarProperty Name="num_of_guests" ColumnName="num_of_guests" />
+          <ScalarProperty Name="table_num" ColumnName="table_num" />
+          <ScalarProperty Name="reservation" ColumnName="reservation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUnusedTables">
+      <EntityTypeMapping TypeName="Models.tblUnusedTable">
+        <MappingFragment StoreEntitySet="tblUnusedTable">
+          <ScalarProperty Name="table_num" ColumnName="table_num" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsedTables">
+      <EntityTypeMapping TypeName="Models.tblUsedTable">
+        <MappingFragment StoreEntitySet="tblUsedTables">
+          <ScalarProperty Name="table_num" ColumnName="table_num" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

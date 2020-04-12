@@ -1,0 +1,42 @@
+﻿@model FinalProject.Models.tblDeliveryOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblDeliveryOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.special_instructions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.special_instructions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time_order_placed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time_order_placed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer_address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.order_num }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

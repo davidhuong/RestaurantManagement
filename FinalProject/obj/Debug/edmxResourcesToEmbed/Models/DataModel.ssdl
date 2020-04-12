@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblDeliveryOrder">
+    <Key>
+      <PropertyRef Name="order_num" />
+    </Key>
+    <Property Name="order_num" Type="int" Nullable="false" />
+    <Property Name="special_instructions" Type="varchar" MaxLength="50" />
+    <Property Name="time_order_placed" Type="datetime" />
+    <Property Name="customer_address" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblGuestFeedback">
+    <Key>
+      <PropertyRef Name="feedback_id" />
+    </Key>
+    <Property Name="feedback_id" Type="int" Nullable="false" />
+    <Property Name="guest_phone_number" Type="varchar" MaxLength="50" />
+    <Property Name="feedback_content" Type="varchar" MaxLength="50" />
+    <Property Name="date_submitted" Type="date" />
+    <Property Name="guest_email" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblGuests">
+    <Key>
+      <PropertyRef Name="guest_phone_number" />
+    </Key>
+    <Property Name="guest_phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="guest_name" Type="varchar" MaxLength="50" />
+    <Property Name="time_arrived" Type="datetime" />
+    <Property Name="num_of_guests" Type="int" />
+    <Property Name="table_num" Type="int" Nullable="false" />
+    <Property Name="reservation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUnusedTable">
+    <Key>
+      <PropertyRef Name="table_num" />
+    </Key>
+    <Property Name="table_num" Type="int" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUsedTables">
+    <Key>
+      <PropertyRef Name="table_num" />
+    </Key>
+    <Property Name="table_num" Type="int" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__tblGuestF__guest__36B12243">
+    <End Role="tblGuests" Type="Self.tblGuests" Multiplicity="0..1" />
+    <End Role="tblGuestFeedback" Type="Self.tblGuestFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGuests">
+        <PropertyRef Name="guest_phone_number" />
+      </Principal>
+      <Dependent Role="tblGuestFeedback">
+        <PropertyRef Name="guest_phone_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblGuests__table__47DBAE45">
+    <End Role="tblUsedTables" Type="Self.tblUsedTables" Multiplicity="1" />
+    <End Role="tblGuests" Type="Self.tblGuests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsedTables">
+        <PropertyRef Name="table_num" />
+      </Principal>
+      <Dependent Role="tblGuests">
+        <PropertyRef Name="table_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="tblDeliveryOrder" EntityType="Self.tblDeliveryOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGuestFeedback" EntityType="Self.tblGuestFeedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGuests" EntityType="Self.tblGuests" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUnusedTable" EntityType="Self.tblUnusedTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsedTables" EntityType="Self.tblUsedTables" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblGuestF__guest__36B12243" Association="Self.FK__tblGuestF__guest__36B12243">
+      <End Role="tblGuests" EntitySet="tblGuests" />
+      <End Role="tblGuestFeedback" EntitySet="tblGuestFeedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblGuests__table__47DBAE45" Association="Self.FK__tblGuests__table__47DBAE45">
+      <End Role="tblUsedTables" EntitySet="tblUsedTables" />
+      <End Role="tblGuests" EntitySet="tblGuests" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

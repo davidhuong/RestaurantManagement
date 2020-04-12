@@ -1,0 +1,58 @@
+﻿@model FinalProject.Models.tblGuest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblGuest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.guest_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.guest_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time_arrived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time_arrived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.num_of_guests)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_of_guests)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reservation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reservation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUsedTable.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUsedTable.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.guest_phone_number }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FinalProject.Models.tblDeliveryOrder>
+
+@{
+    ViewBag.Title = "SortByLatest";
+}
+
+<h2>SortByLatest</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("Sort by latest", "SortByLatest") |
+    @Html.ActionLink("Sort by Earliest", "SortByEarliest")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.special_instructions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time_order_placed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_address)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.special_instructions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time_order_placed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer_address)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.order_num }) |
+            @Html.ActionLink("Details", "Details", new { id=item.order_num }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.order_num })
+        </td>
+    </tr>
+}
+
+</table>
